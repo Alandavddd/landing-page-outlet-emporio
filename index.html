@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outlet Empório — Preço de Atacado | Nova Santa Rita</title>
+<meta name="description" content="Outlet Empório: atacado de roupas sem mínimo de peças em Nova Santa Rita. Feminino, plus size, freesurf e mais. Atendimento direto no WhatsApp.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================
+     1. TOKENS — mude as cores/fontes daqui pra todo o site
+     ===================================================== */
+  :root{
+    --preto: #0d0c0a;
+    --preto-2: #17140f;
+    --carvao: #211d17;
+    --amarelo: #f6c90e;
+    --amarelo-escuro: #d9a900;
+    --rosa: #ef3f8d;
+    --creme: #f6f0df;
+    --branco: #fbf9f3;
+    --linha: rgba(246,201,14,0.18);
+
+    --fonte-display: 'Anton', sans-serif;
+    --fonte-corpo: 'Inter', sans-serif;
+
+    --raio-tag: 6px;
+    --container: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--preto);
+    color: var(--creme);
+    font-family: var(--fonte-corpo);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+
+  .container{
+    width:100%;
+    max-width: var(--container);
+    margin-inline:auto;
+    padding-inline: 24px;
+  }
+
+  h1,h2,h3{
+    font-family: var(--fonte-display);
+    font-weight:400;
+    letter-spacing: 0.3px;
+    line-height: 1.05;
+    margin:0;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family: var(--fonte-corpo);
+    font-weight:700;
+    font-size: 1rem;
+    padding: 15px 28px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor:pointer;
+    transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn:focus-visible{ outline: 3px solid var(--amarelo); outline-offset: 3px; }
+
+  .btn-amarelo{ background: var(--amarelo); color: var(--preto); }
+  .btn-amarelo:hover{ background: var(--branco); }
+
+  .btn-contorno{ background: transparent; color: var(--branco); border-color: rgba(251,249,243,0.35); }
+  .btn-contorno:hover{ border-color: var(--branco); }
+
+  .btn-preto{ background: var(--preto); color: var(--amarelo); }
+  .btn-preto:hover{ background: var(--carvao); }
+
+  .icone-wpp{ width:18px; height:18px; flex-shrink:0; }
+
+  /* =====================================================
+     2. CABEÇALHO
+     ===================================================== */
+  header{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    background: rgba(13,12,10,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--linha);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-block: 12px;
+    gap: 20px;
+  }
+  .marca{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family: var(--fonte-display);
+    font-size: 1.15rem;
+    color: var(--branco);
+  }
+  .marca img{ width:44px; height:44px; border-radius: 10px; object-fit:cover; }
+  .marca span{ display:block; }
+  .marca small{
+    display:block;
+    font-family: var(--fonte-corpo);
+    font-weight:600;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    color: var(--amarelo);
+    margin-top: 2px;
+  }
+  nav.principal ul{ display:flex; gap:28px; }
+  nav.principal a{
+    font-weight:600;
+    font-size: 0.92rem;
+    color: rgba(251,249,243,0.75);
+    transition: color .15s ease;
+  }
+  nav.principal a:hover{ color: var(--amarelo); }
+  .header-cta{ display:flex; align-items:center; gap:18px; }
+  .header-cta .btn{ padding: 11px 20px; font-size: 0.88rem; }
+
+  .menu-toggle{
+    display:none;
+    background:none; border:none; color: var(--branco);
+    width: 40px; height:40px; cursor:pointer;
+    flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  }
+  .menu-toggle span{ width: 22px; height:2px; background: var(--branco); display:block; }
+
+  /* =====================================================
+     3. HERO
+     ===================================================== */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding-top: 72px;
+    padding-bottom: 96px;
+    background:
+      radial-gradient(ellipse 900px 620px at 82% -10%, rgba(246,201,14,0.16), transparent 60%),
+      var(--preto);
+  }
+  .raios{
+    position:absolute;
+    top: -220px;
+    right: -260px;
+    width: 720px;
+    height: 720px;
+    opacity: 0.5;
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .etiqueta-flutuante{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: var(--rosa);
+    color: var(--branco);
+    font-weight:700;
+    font-size: 0.8rem;
+    padding: 8px 16px 8px 14px;
+    border-radius: var(--raio-tag);
+    transform: rotate(-2deg);
+    margin-bottom: 22px;
+  }
+  .etiqueta-flutuante::before{
+    content:"";
+    width:8px; height:8px;
+    background: var(--preto);
+    border-radius:50%;
+  }
+  .hero h1{
+    color: var(--branco);
+    font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+    text-transform: uppercase;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color: var(--amarelo);
+  }
+  .hero p.lead{
+    max-width: 46ch;
+    color: rgba(251,249,243,0.78);
+    font-size: 1.08rem;
+    margin-top: 22px;
+  }
+  .hero-acoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 16px;
+    margin-top: 34px;
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size: 0.85rem;
+    font-weight:600;
+    color: var(--creme);
+    background: rgba(246,201,14,0.08);
+    border: 1px solid var(--linha);
+    padding: 9px 14px;
+    border-radius: 999px;
+  }
+  .chip svg{ width:15px; height:15px; color: var(--amarelo); flex-shrink:0; }
+
+  .hero-visual{ position:relative; }
+  .hero-visual .moldura{
+    position:relative;
+    background: var(--carvao);
+    border: 1px solid var(--linha);
+    border-radius: 18px;
+    padding: 18px 18px 22px;
+    transform: rotate(1.4deg);
+  }
+  .hero-visual .foto-wrap{
+    border-radius: 10px;
+    overflow:hidden;
+    background: var(--preto);
+    aspect-ratio: 16 / 9;
+  }
+  .hero-visual img{ width:100%; height:100%; object-fit: cover; display:block; }
+  .tags-row{
+    display:flex;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .tag-preco{
+    flex: 1;
+    text-align:center;
+    background: var(--amarelo);
+    color: var(--preto);
+    font-family: var(--fonte-display);
+    padding: 12px 14px 10px;
+    border-radius: var(--raio-tag);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    line-height:1;
+    transform: rotate(-1.5deg);
+  }
+  .tag-preco small{
+    display:block;
+    font-family: var(--fonte-corpo);
+    font-weight:700;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .tag-preco span{ font-size: 1.4rem; }
+  .tag-preco.tag-2{ transform: rotate(1.5deg); background: var(--preto); color: var(--amarelo); border: 2px solid var(--amarelo); }
+
+  /* =====================================================
+     4. FAIXA DE VALORES (bloco amarelo)
+     ===================================================== */
+  .faixa-valores{
+    background: var(--amarelo);
+    color: var(--preto);
+    clip-path: polygon(0 22px, 100% 0, 100% calc(100% - 22px), 0 100%);
+    padding-block: 46px;
+    margin-top: -12px;
+  }
+  .valores-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .valor-item{ display:flex; gap:14px; align-items:flex-start; }
+  .valor-item svg{ width:30px; height:30px; flex-shrink:0; margin-top:2px; }
+  .valor-item h3{
+    font-family: var(--fonte-corpo);
+    font-weight:800;
+    font-size: 1.02rem;
+    text-transform:uppercase;
+    letter-spacing: 0.01em;
+  }
+  .valor-item p{ margin: 6px 0 0; font-size: 0.92rem; color: rgba(13,12,10,0.75); }
+
+  /* =====================================================
+     5. CATEGORIAS
+     ===================================================== */
+  section{ padding-block: 96px; }
+  .cabecalho-secao{ max-width: 60ch; margin-bottom: 48px; }
+  .cabecalho-secao .rotulo{
+    color: var(--amarelo);
+    font-weight:700;
+    font-size: 0.85rem;
+  }
+  .cabecalho-secao h2{
+    color: var(--branco);
+    font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .cabecalho-secao p{ color: rgba(251,249,243,0.68); margin-top: 14px; font-size: 1.02rem; }
+
+  #categorias{ background: var(--preto-2); }
+  .categorias-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 180px;
+    gap: 18px;
+  }
+  .cat-card{
+    position:relative;
+    border-radius: 14px;
+    padding: 22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    overflow:hidden;
+    transition: transform .18s ease;
+  }
+  .cat-card:hover{ transform: translateY(-4px); }
+  .cat-card h3{
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    position:relative;
+    z-index:2;
+  }
+  .cat-card .seta{
+    position:absolute; top:18px; right:18px;
+    width: 34px; height:34px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .cat-card .seta svg{ width:16px; height:16px; }
+  .cat-card::after{
+    content:"";
+    position:absolute; inset:0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 14px);
+    z-index:1;
+  }
+  .cat-c1{ background: var(--amarelo); color: var(--preto); grid-column: span 2; }
+  .cat-c1 .seta{ background: var(--preto); color:var(--amarelo); }
+  .cat-c2{ background: var(--carvao); color: var(--branco); border: 1px solid var(--linha); }
+  .cat-c2 .seta{ background: var(--amarelo); color:var(--preto); }
+  .cat-c3{ background: var(--rosa); color: var(--branco); }
+  .cat-c3 .seta{ background: var(--preto); color:var(--branco); }
+  .cat-c4{ background: var(--carvao); color: var(--branco); border: 1px solid var(--linha); grid-column: span 2; }
+  .cat-c4 .seta{ background: var(--amarelo); color:var(--preto); }
+  .cat-c5{ background: var(--preto); color: var(--amarelo); border: 2px solid var(--amarelo); grid-column: span 2; }
+  .cat-c5 .seta{ background: var(--amarelo); color:var(--preto); }
+
+  /* =====================================================
+     6. DESTAQUES / PROMOÇÕES
+     ===================================================== */
+  #destaques .container{
+    display:grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 60px;
+    align-items:center;
+  }
+  .destaque-imagem{ position:relative; }
+  .destaque-imagem .moldura{
+    background: var(--carvao);
+    border: 1px solid var(--linha);
+    border-radius: 18px;
+    padding: 16px;
+    transform: rotate(-1.2deg);
+  }
+  .destaque-imagem img{ border-radius: 10px; }
+  .destaque-selo{
+    position:absolute;
+    bottom: -22px;
+    left: -20px;
+    background: var(--rosa);
+    color: var(--branco);
+    font-family: var(--fonte-display);
+    font-size: 1.05rem;
+    padding: 12px 18px;
+    border-radius: var(--raio-tag);
+    transform: rotate(4deg);
+    box-shadow: 0 14px 26px rgba(0,0,0,0.4);
+  }
+  .lista-promo{ margin-top: 30px; display:flex; flex-direction:column; gap:16px; }
+  .promo-linha{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--preto-2);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+  }
+  .promo-linha .nome{ font-weight:700; color: var(--branco); }
+  .promo-linha .nome small{ display:block; font-weight:500; color: rgba(251,249,243,0.55); font-size:0.82rem; margin-top:3px;}
+  .promo-linha .preco{ font-family: var(--fonte-display); color: var(--amarelo); font-size: 1.3rem; white-space:nowrap; }
+
+  /* =====================================================
+     7. LOCALIZAÇÃO
+     ===================================================== */
+  #local{ background: var(--preto-2); }
+  #local .container{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 60px;
+    align-items:center;
+  }
+  .info-local{ display:flex; gap:14px; padding-block: 16px; border-top: 1px solid var(--linha); }
+  .info-local:last-of-type{ border-bottom: 1px solid var(--linha); }
+  .info-local svg{ width:22px; height:22px; color: var(--amarelo); flex-shrink:0; margin-top:2px; }
+  .info-local strong{ display:block; color: var(--branco); font-size:0.98rem; }
+  .info-local span{ color: rgba(251,249,243,0.65); font-size: 0.92rem; }
+  .mapa-wrap{
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1px solid var(--linha);
+    filter: grayscale(0.35) contrast(1.05);
+  }
+  .mapa-wrap iframe{ width:100%; height: 380px; border:0; display:block; }
+
+  /* =====================================================
+     8. CTA FINAL
+     ===================================================== */
+  #cta-final{
+    background: var(--amarelo);
+    color: var(--preto);
+    text-align:center;
+    clip-path: polygon(0 26px, 100% 0, 100% 100%, 0 100%);
+    padding-block: 110px 96px;
+  }
+  #cta-final h2{
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    text-transform:uppercase;
+    max-width: 16ch;
+    margin-inline:auto;
+  }
+  #cta-final p{ margin-top:18px; font-size:1.05rem; color: rgba(13,12,10,0.72); }
+  .cta-final-acoes{ display:flex; justify-content:center; gap:16px; margin-top:34px; flex-wrap:wrap; }
+  #cta-final .btn-preto{ }
+  #cta-final .btn-contorno{ color: var(--preto); border-color: rgba(13,12,10,0.4); }
+  #cta-final .btn-contorno:hover{ border-color: var(--preto); }
+
+  /* =====================================================
+     9. RODAPÉ
+     ===================================================== */
+  footer{ padding-block: 56px; }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    gap: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--linha);
+    flex-wrap:wrap;
+  }
+  .footer-marca{ display:flex; gap:12px; align-items:center; }
+  .footer-marca img{ width:40px; height:40px; border-radius:8px; }
+  .footer-marca strong{ font-family: var(--fonte-display); color: var(--branco); font-size:1.05rem; display:block; }
+  .footer-marca span{ color: rgba(251,249,243,0.55); font-size:0.85rem; }
+  .footer-social{ display:flex; gap:12px; }
+  .footer-social a{
+    width:42px; height:42px; border-radius:50%;
+    border: 1px solid var(--linha);
+    display:flex; align-items:center; justify-content:center;
+    transition: border-color .15s ease, background-color .15s ease;
+  }
+  .footer-social a:hover{ background: var(--amarelo); border-color: var(--amarelo); color: var(--preto); }
+  .footer-social svg{ width:19px; height:19px; }
+  .footer-baixo{
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding-top: 26px;
+    font-size: 0.82rem;
+    color: rgba(251,249,243,0.45);
+  }
+
+  /* =====================================================
+     10. BOTÃO WHATSAPP FLUTUANTE
+     ===================================================== */
+  .wpp-flutuante{
+    position:fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 60;
+    width: 60px; height:60px;
+    border-radius:50%;
+    background: var(--amarelo);
+    color: var(--preto);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+    transition: transform .15s ease;
+  }
+  .wpp-flutuante:hover{ transform: scale(1.07); }
+  .wpp-flutuante svg{ width:28px; height:28px; }
+
+  /* =====================================================
+     11. RESPONSIVO
+     ===================================================== */
+  @media (max-width: 980px){
+    .hero-grid, #destaques .container, #local .container{
+      grid-template-columns: 1fr;
+    }
+    .hero-visual{ order:-1; max-width: 460px; margin-inline:auto; }
+    .valores-grid{ grid-template-columns: 1fr; gap: 26px; }
+    .categorias-grid{ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; }
+    .cat-c1, .cat-c4, .cat-c5{ grid-column: span 2; }
+    section{ padding-block: 72px; }
+  }
+
+  @media (max-width: 760px){
+    nav.principal{ display:none; }
+    .header-cta .btn-contorno{ display:none; }
+    .menu-toggle{ display:flex; }
+    .destaque-selo{ display:none; }
+    .footer-grid{ flex-direction:column; align-items:flex-start; }
+  }
+
+  @media (max-width: 560px){
+    .categorias-grid{ grid-template-columns: 1fr; grid-auto-rows: 150px; }
+    .cat-c1, .cat-c4, .cat-c5{ grid-column: span 1; }
+    .chips{ flex-direction:column; align-items:flex-start; }
+    .promo-linha{ flex-direction:column; align-items:flex-start; gap:6px; }
+    #cta-final, .faixa-valores{ clip-path:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     CABEÇALHO
+     ===================================================== -->
+<header>
+  <div class="container header-inner">
+    <a class="marca" href="#topo">
+      <img src="assets/logo.png" alt="Logo Outlet Empório">
+      <span>Outlet Empório<small>PREÇO DE ATACADO</small></span>
+    </a>
+    <nav class="principal">
+      <ul>
+        <li><a href="#categorias">Categorias</a></li>
+        <li><a href="#destaques">Promoções</a></li>
+        <li><a href="#local">Localização</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-contorno" href="https://instagram.com/outletemporionsr" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-amarelo" id="wpp-header" href="#" target="_blank" rel="noopener">
+        <svg class="icone-wpp" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.4A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3 .85.86-2.92-.19-.3A8 8 0 1 1 12 20zm4.4-5.85c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<div id="topo"></div>
+<section class="hero">
+  <svg class="raios" viewBox="0 0 200 200">
+    <g fill="none" stroke="#f6c90e" stroke-width="1.4">
+      <circle cx="100" cy="100" r="40" opacity="0.5"/>
+      <g id="raios-linhas"></g>
+    </g>
+  </svg>
+  <div class="container hero-grid">
+    <div class="hero-texto">
+      <span class="etiqueta-flutuante">Nova Santa Rita e região</span>
+      <h1>Atacado sem <em>mínimo</em> de peças, direto da fábrica</h1>
+      <p class="lead" id="texto-hero">Roupa boa, preço de atacado, sem enrolação. Vem conferir de perto as novidades e leve quantas peças quiser — do provador direto pra sua sacola.</p>
+      <div class="hero-acoes">
+        <a class="btn btn-amarelo" id="wpp-hero" href="#" target="_blank" rel="noopener">
+          <svg class="icone-wpp" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.4A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3 .85.86-2.92-.19-.3A8 8 0 1 1 12 20zm4.4-5.85c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+          Chamar no WhatsApp
+        </a>
+        <a class="btn btn-contorno" href="#categorias">Ver categorias</a>
+      </div>
+      <div class="chips">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Av. Santa Rita, 916 - Sala 3
+        </span>
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Seg a Sáb · 9h às 20h
+        </span>
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-1a4 4 0 0 0-3-3.87M9 20H4v-1a4 4 0 0 1 3-3.87m5-4.13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6-2a4 4 0 0 0-3-3.87M7 6.13A4 4 0 0 0 4 10"/></svg>
+          33,1 mil seguidores no Instagram
+        </span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="moldura">
+        <div class="foto-wrap">
+          <img src="assets/promo-banner.png" alt="Promoções de inverno da Outlet Empório: jaquetas e casacos">
+        </div>
+        <div class="tags-row">
+          <div class="tag-preco tag-1"><small>JAQUETA</small><span>R$89,99</span></div>
+          <div class="tag-preco tag-2"><small>CASACO</small><span>R$149,99</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FAIXA DE VALORES
+     ===================================================== -->
+<div class="faixa-valores">
+  <div class="container valores-grid" id="grid-valores"></div>
+</div>
+
+<!-- =====================================================
+     CATEGORIAS
+     ===================================================== -->
+<section id="categorias">
+  <div class="container">
+    <div class="cabecalho-secao">
+      <span class="rotulo">O que você encontra aqui</span>
+      <h2>Categorias pra todo perfil de cliente</h2>
+      <p>Toque numa categoria e fale direto com a gente no WhatsApp — já chega pedindo o que precisa.</p>
+    </div>
+    <div class="categorias-grid" id="grid-categorias"></div>
+  </div>
+</section>
+
+<!-- =====================================================
+     DESTAQUES / PROMOÇÕES
+     ===================================================== -->
+<section id="destaques">
+  <div class="container">
+    <div class="destaque-imagem">
+      <div class="moldura">
+        <img src="assets/perfumes.png" alt="Mini perfumes árabes Outlet Empório">
+      </div>
+      <div class="destaque-selo">R$100 cada</div>
+    </div>
+    <div class="destaque-texto">
+      <span class="rotulo" style="color:var(--rosa)">Toda semana tem</span>
+      <h2 style="color:var(--branco); font-size:clamp(1.9rem,3.4vw,2.7rem); text-transform:uppercase; margin-top:10px;">Promoção não é só no inverno</h2>
+      <p style="color:rgba(251,249,243,0.68); margin-top:14px; font-size:1.02rem;">A gente troca a vitrine toda semana. De jaqueta a mini perfume árabe, sempre tem alguma coisa saindo com o preço lá embaixo — e é só chegar ou chamar no WhatsApp pra saber o que está em oferta hoje.</p>
+      <div class="lista-promo" id="lista-promocoes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     LOCALIZAÇÃO
+     ===================================================== -->
+<section id="local">
+  <div class="container">
+    <div class="local-texto">
+      <span class="rotulo" style="color:var(--amarelo)">Atendimento presencial</span>
+      <h2 style="color:var(--branco); font-size:clamp(1.9rem,3.4vw,2.7rem); text-transform:uppercase; margin-top:10px;">Perto de você, em Nova Santa Rita</h2>
+      <p style="color:rgba(251,249,243,0.68); margin-top:14px; font-size:1.02rem;">Atendemos moradores de Nova Santa Rita e das cidades vizinhas. Não trabalhamos com envio pra fora da região — a ideia é você vir experimentar, sentir o tecido e já sair com a peça.</p>
+
+      <div class="info-local">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div><strong>Endereço</strong><span>Av. Santa Rita, 916 - Sala 3, Nova Santa Rita - RS</span></div>
+      </div>
+      <div class="info-local">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><strong>Horário</strong><span>Segunda a sábado, das 9h às 20h</span></div>
+      </div>
+      <div class="info-local">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        <div><strong>Atendimento</strong><span>Sem hora marcada — é só aparecer na loja</span></div>
+      </div>
+
+      <div class="hero-acoes" style="margin-top:30px;">
+        <a class="btn btn-amarelo" id="wpp-local" href="#" target="_blank" rel="noopener">Combinar minha visita</a>
+      </div>
+    </div>
+    <div class="mapa-wrap">
+      <iframe src="https://maps.google.com/maps?q=Av.%20Santa%20Rita%2C%20916%2C%20Nova%20Santa%20Rita%20-%20RS&t=&z=15&output=embed" loading="lazy" title="Mapa até a Outlet Empório"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CTA FINAL
+     ===================================================== -->
+<section id="cta-final">
+  <div class="container">
+    <h2>Vem garantir o seu no atacado</h2>
+    <p>Chama a gente no WhatsApp e já separa suas peças antes de vir até a loja.</p>
+    <div class="cta-final-acoes">
+      <a class="btn btn-preto" id="wpp-final" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a class="btn btn-contorno" href="https://instagram.com/outletemporionsr" target="_blank" rel="noopener">@outletemporionsr</a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     RODAPÉ
+     ===================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <img src="assets/logo.png" alt="Logo Outlet Empório">
+        <div><strong>Outlet Empório</strong><span>Preço de atacado · Nova Santa Rita - RS</span></div>
+      </div>
+      <div class="footer-social">
+        <a href="https://instagram.com/outletemporionsr" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="#" id="wpp-footer" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.4A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3 .85.86-2.92-.19-.3A8 8 0 1 1 12 20z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-baixo">
+      <span>© <span id="ano"></span> Outlet Empório — Atacado de roupas em Nova Santa Rita</span>
+      <span>Av. Santa Rita, 916 - Sala 3</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wpp-flutuante" id="wpp-flutuante" href="#" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.4A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3 .85.86-2.92-.19-.3A8 8 0 1 1 12 20zm4.4-5.85c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.62-1.18-1.39-1.32-1.63-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<script>
+/* =========================================================================
+   PAINEL DE CONTEÚDO — é só editar os valores aqui embaixo.
+   Nada de mexer no HTML/CSS pra trocar texto, telefone, categorias, etc.
+   ========================================================================= */
+const CONFIG = {
+
+  // Número de WhatsApp com código do país, sem espaços, + e traços.
+  // Ex: 55 (Brasil) + 51 (DDD) + o número
+  whatsapp: "5551996601995",
+
+  // Mensagem padrão que abre quando alguém clica no botão do WhatsApp
+  // no cabeçalho, no rodapé e no botão flutuante.
+  mensagemPadraoWhatsapp: "Olá! Vi a página da Outlet Empório e quero saber mais sobre as roupas.",
+
+  // Mensagem do botão específico da seção "Localização"
+  mensagemLocalWhatsapp: "Olá! Quero passar na loja da Outlet Empório, vocês podem me passar o endereço certinho?",
+
+  // Cartões de categoria. Pode adicionar, remover ou reordenar itens aqui.
+  // "estilo" controla a cor do cartão: usa "c1" a "c5" (definidos no CSS).
+  categorias: [
+    { nome: "Feminino",        estilo: "c1", mensagem: "Olá! Quero ver as novidades da linha feminina." },
+    { nome: "Plus Size",       estilo: "c2", mensagem: "Olá! Vocês têm peças plus size disponíveis?" },
+    { nome: "Freesurf",        estilo: "c3", mensagem: "Olá! Quero ver as opções da linha Freesurf." },
+    { nome: "Perfumes Árabes", estilo: "c4", mensagem: "Olá! Quero saber mais sobre os mini perfumes árabes." },
+    { nome: "Sal & Pimenta",   estilo: "c5", mensagem: "Olá! Quero ver as peças da linha Sal & Pimenta." },
+  ],
+
+  // Ícones/valores da faixa amarela logo abaixo do topo da página
+  valores: [
+    { titulo: "Sem mínimo de peças", texto: "Compre 1 ou 100 — o preço de atacado é o mesmo pra todo mundo." },
+    { titulo: "Atendimento direto",  texto: "Fala com a gente pelo WhatsApp e já vem sabendo o que vai levar." },
+    { titulo: "Atacado e varejo",    texto: "Loja física em Nova Santa Rita, aberta de segunda a sábado." },
+  ],
+
+  // Lista de promoções da seção "Destaques". Preço "de" é opcional —
+  // se não usar, apague a linha "de".
+  promocoes: [
+    { nome: "Jaqueta unissex", tamanho: "Do P ao G5", de: "R$150,00", por: "R$89,99" },
+    { nome: "Casaco lã batida", tamanho: "Tamanho único", de: "R$249,99", por: "R$149,99" },
+    { nome: "Jaqueta de couro ecológico", tamanho: "Coleção inverno", de: "R$269,00", por: "R$119,99" },
+    { nome: "Mini perfume árabe 30ml", tamanho: "Asad ou Yara", por: "R$100,00" },
+  ],
+};
+
+/* ---- a partir daqui é só o motor que lê o CONFIG acima, não precisa mexer ---- */
+
+function linkWhatsapp(mensagem){
+  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensagem)}`;
+}
+
+// Botões fixos de WhatsApp (cabeçalho, hero, rodapé, flutuante, cta final)
+["wpp-header","wpp-hero","wpp-final","wpp-footer","wpp-flutuante"].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.href = linkWhatsapp(CONFIG.mensagemPadraoWhatsapp);
+});
+const wppLocal = document.getElementById("wpp-local");
+if(wppLocal) wppLocal.href = linkWhatsapp(CONFIG.mensagemLocalWhatsapp);
+
+// Ícone de seta usado nos cartões de categoria
+const svgSeta = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
+
+// Monta os cartões de categoria
+const gridCategorias = document.getElementById("grid-categorias");
+CONFIG.categorias.forEach(cat=>{
+  const a = document.createElement("a");
+  a.className = `cat-card cat-${cat.estilo}`;
+  a.href = linkWhatsapp(cat.mensagem);
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.innerHTML = `<span class="seta">${svgSeta}</span><h3>${cat.nome}</h3>`;
+  gridCategorias.appendChild(a);
+});
+
+// Monta a faixa de valores (ícones simples e reaproveitáveis)
+const iconesValores = [
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg>`,
+];
+const gridValores = document.getElementById("grid-valores");
+CONFIG.valores.forEach((v,i)=>{
+  const div = document.createElement("div");
+  div.className = "valor-item";
+  div.innerHTML = `${iconesValores[i % iconesValores.length]}<div><h3>${v.titulo}</h3><p>${v.texto}</p></div>`;
+  gridValores.appendChild(div);
+});
+
+// Monta a lista de promoções
+const listaPromo = document.getElementById("lista-promocoes");
+CONFIG.promocoes.forEach(p=>{
+  const linha = document.createElement("div");
+  linha.className = "promo-linha";
+  linha.innerHTML = `
+    <span class="nome">${p.nome}${p.tamanho ? `<small>${p.tamanho}</small>` : ""}</span>
+    <span class="preco">${p.de ? `<span style="text-decoration:line-through;color:rgba(251,249,243,0.4);font-size:0.85rem;margin-right:8px;">${p.de}</span>` : ""}${p.por}</span>
+  `;
+  listaPromo.appendChild(linha);
+});
+
+// Desenha os raios do sol atrás do hero (decorativo, puro SVG)
+const raiosGrupo = document.getElementById("raios-linhas");
+if(raiosGrupo){
+  const total = 16;
+  for(let i=0;i<total;i++){
+    const ang = (i / total) * Math.PI * 2;
+    const x1 = 100 + Math.cos(ang) * 46;
+    const y1 = 100 + Math.sin(ang) * 46;
+    const x2 = 100 + Math.cos(ang) * 96;
+    const y2 = 100 + Math.sin(ang) * 96;
+    const linha = document.createElementNS("http://www.w3.org/2000/svg","line");
+    linha.setAttribute("x1", x1); linha.setAttribute("y1", y1);
+    linha.setAttribute("x2", x2); linha.setAttribute("y2", y2);
+    linha.setAttribute("opacity", i % 2 === 0 ? "0.55" : "0.25");
+    raiosGrupo.appendChild(linha);
+  }
+}
+
+// Ano automático no rodapé
+document.getElementById("ano").textContent = new Date().getFullYear();
+
+// Menu mobile simples: rola até a seção e fecha
+document.getElementById("menu-toggle")?.addEventListener("click", ()=>{
+  document.getElementById("categorias").scrollIntoView({behavior:"smooth"});
+});
+</script>
+</body>
+</html>
